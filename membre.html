@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gestion des membres</title>
+</head>
+<body>
+
+<h2>Gestion des membres</h2>
+
+<form id="memberForm">
+    <label for="nom">Prénom:</label><br>
+    <input type="text" id="nom" name="nom"><br>
+    <label for="prenom">Nom:</label><br>
+    <input type="text" id="prenom" name="prenom"><br>
+    <label for="age">Âge:</label><br>
+    <input type="number" id="age" name="age"><br>
+    <label for="telephone">telephone:</label><br>
+    <input type="text" id="telephone" name="telephone"><br><br>
+    <button type="submit" id="submitButton">Ajouter</button>
+</form>
+
+<ul id="memberList">
+    <!-- Les membres seront ajoutés ici -->
+</ul>
+
+<script>
+    const form = document.getElementById("memberForm");
+    const memberList = document.getElementById("memberList");
+
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const nom = form.elements["nom"].value;
+        const prenom = form.elements["prenom"].value;
+        const age = form.elements["age"].value;
+        const telephone = form.elements["telephone"].value;
+
+        const memberItem = document.createElement("li");
+        memberItem.textContent = `${nom} ${prenom}, ${age} ans, Tél: ${telephone}`;
+
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Supprimer";
+        deleteButton.addEventListener("click", function() {
+            memberItem.remove();
+        });
+
+        memberItem.appendChild(deleteButton);
+        memberList.appendChild(memberItem);
+
+        form.reset();
+    });
+</script>
+
+</body>
+</html>
